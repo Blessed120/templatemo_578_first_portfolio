@@ -1,14 +1,15 @@
 
-# Use the official Nginx image
+# Use official NGINX image
 FROM nginx:alpine
 
-# Copy your static website files to the Nginx HTML folder
-WORKDIR /usr/share/nginx/html
+# Remove default website
+RUN rm -rf /usr/share/nginx/html/*
 
-COPY . . 
+# Copy your static site files to Nginx directory
+COPY . /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
 
-# Start Nginx when the container launches
+# Start NGINX
 CMD ["nginx", "-g", "daemon off;"]
